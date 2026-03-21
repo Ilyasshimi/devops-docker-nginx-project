@@ -2,42 +2,38 @@
 
 ## Overview
 
-This project demonstrates a simple DevOps microservices architecture using Docker and Docker Compose.
+This project demonstrates a DevOps microservices architecture using Docker and Docker Compose.
 
 The system includes multiple services running in containers:
 
-* Frontend (NGINX)
-* Backend API (Node.js)
-* MySQL Database
-* Monitoring stack (Prometheus and Grafana)
+- Frontend (NGINX)
+- Backend API (Node.js)
+- MySQL Database
+- Monitoring stack (Prometheus and Grafana)
+- CI/CD Pipeline (GitHub Actions)
 
-The goal of this project is to practice containerization, service orchestration, and monitoring in a microservices environment.
+The goal is to practice containerization, service orchestration, monitoring, and automation in a microservices environment.
 
 ---
 
-# Architecture
+## Architecture
 
-The application follows a microservices architecture.
-
-User requests go through the frontend service, which communicates with the backend API and database.
-
-Monitoring tools collect metrics from the services.
-
+User requests go through the frontend service, which communicates with the backend API and database. Monitoring tools collect metrics from all services.
 ```
 User
  |
  v
-Frontend (NGINX)
+Frontend (NGINX) :8080
  |
  v
-Backend API (Node.js)
+Backend API (Node.js) :4000
  |
  v
-MySQL Database
+MySQL Database :3306
 
 Monitoring
- ├ Prometheus
- └ Grafana
+ ├── Prometheus :9090
+ └── Grafana :3001
 ```
 
 ---
@@ -48,22 +44,27 @@ Monitoring
 
 ---
 
-# Technologies Used
+## Tech Stack
 
-* Docker
-* Docker Compose
-* NGINX
-* Node.js
-* MySQL
-* Prometheus
-* Grafana
+| Tool | Purpose |
+|---|---|
+| Docker | Containerization |
+| Docker Compose | Multi-container orchestration |
+| NGINX | Frontend / Reverse Proxy |
+| Node.js | Backend API |
+| MySQL | Database |
+| Prometheus | Metrics collection |
+| Grafana | Monitoring dashboard |
+| GitHub Actions | CI/CD pipeline |
 
 ---
 
-# Project Structure
-
+## Project Structure
 ```
 devops-docker-microservices-project
+│
+├── .github/workflows
+│   └── docker-ci.yml
 │
 ├── frontend
 │   ├── Dockerfile
@@ -80,78 +81,57 @@ devops-docker-microservices-project
 
 ---
 
-# Services and Ports
+## Services and Ports
 
-| Service     | Port |
-| ----------- | ---- |
-| Frontend    | 8080 |
+| Service | Port |
+|---|---|
+| Frontend | 8080 |
 | Backend API | 4000 |
-| MySQL       | 3306 |
-| Prometheus  | 9090 |
-| Grafana     | 3001 |
+| MySQL | 3306 |
+| Prometheus | 9090 |
+| Grafana | 3001 |
 
 ---
 
-# Prerequisites
+## Prerequisites
 
-Before running the project, make sure you have:
-
-* Docker
-* Docker Compose
-* Git
+- Docker
+- Docker Compose
+- Git
 
 ---
 
-# Run the Project
+## Run the Project
 
 Start all services:
-
-```
+```bash
+git clone https://github.com/Ilyasshimi/devops-docker-microservices-project.git
+cd devops-docker-microservices-project
 docker-compose up -d
 ```
 
 Check running containers:
-
-```
+```bash
 docker ps
 ```
 
 Stop the services:
-
-```
+```bash
 docker-compose down
 ```
 
 ---
 
-# Access the Services
+## Access the Services
 
-Frontend
-
-```
-http://Localhost:8080
-```
-
-Backend API
-
-```
-http://Localhost:4000
-```
-
-Prometheus Monitoring
-
-```
-http://Localhost:9090
-```
-
-Grafana Dashboard
-
-```
-http://Localhost:3001
-```
+| Service | URL |
+|---|---|
+| Frontend | http://localhost:8080 |
+| Backend API | http://localhost:4000 |
+| Prometheus | http://localhost:9090 |
+| Grafana | http://localhost:3001 |
 
 Default Grafana login:
-
 ```
 username: admin
 password: admin
@@ -159,54 +139,59 @@ password: admin
 
 ---
 
-# Screenshots
+## CI/CD Pipeline
 
-## Running Containers
+This project includes an automated CI/CD pipeline using GitHub Actions.
 
+Pipeline file: `.github/workflows/docker-ci.yml`
+
+On every `git push`, the pipeline automatically:
+
+1. Checks out the code
+2. Builds the frontend Docker image
+3. Builds the backend Docker image
+4. Verifies the build was successful
+
+---
+
+## Screenshots
+
+### Running Containers
 ![Docker Containers](screenshots/01_docker_containers_running.png)
 
-## Frontend Service
-
+### Frontend Service
 ![Frontend](screenshots/04_frontend_service.png)
 
-## Backend API
-
+### Backend API
 ![Backend](screenshots/05_backend_api.png)
 
-## Prometheus Monitoring
-
+### Prometheus Monitoring
 ![Prometheus](screenshots/06_prometheus_monitoring.png)
 
-## Grafana Dashboard
-
+### Grafana Dashboard
 ![Grafana](screenshots/07_grafana_dashboard.png)
 
 ---
 
-# What I Learned
+## What I Learned
 
-* Building Docker images using Dockerfile
-* Running multi-container applications with Docker Compose
-* Creating a simple microservices architecture
-* Monitoring containerized services using Prometheus and Grafana
-* Managing services and ports inside a container environment
-
----
-
-# Future Improvements
-
-Possible improvements for this project:
-
-* Add CI/CD pipeline using GitHub Actions
-* Deploy the project to a cloud platform
-* Add container registry integration
-* Improve monitoring dashboards
+- How to build Docker images using Dockerfile
+- How to run multi-container applications with Docker Compose
+- How to design a microservices architecture
+- How to monitor containerized services with Prometheus and Grafana
+- How to automate CI/CD pipelines with GitHub Actions
 
 ---
 
-# Author
+## Future Improvements
 
-Ilyass Himi
+- Deploy to a cloud platform (AWS EC2)
+- Push Docker images to Docker Hub automatically
+- Improve Grafana monitoring dashboards
 
-DevOps learning project.
+---
 
+## Author
+
+**Ilyass Himi**  
+DevOps learning project — 2025
